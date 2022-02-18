@@ -48,6 +48,10 @@
             }
         }
 
+        function updateCommemt(id) {
+
+        }
+
     </script>
 
     <style>
@@ -121,7 +125,7 @@
         <div>
             <span th:each="comment : ${comments}" class="comment">
                 <p th:utext="${comment.content}"></p>
-                <button th:href="@{|/comment/update/${comment.id}|}">수정</button>
+                <button th:href="onclick=|updateCommemt(${comment.id})|">수정</button>
                 <button th:attr="onclick=|deleteComment(${comment.id})|">삭제</button>
             </span>
         </div>

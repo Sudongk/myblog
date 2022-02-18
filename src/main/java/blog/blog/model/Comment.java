@@ -1,5 +1,6 @@
 package blog.blog.model;
 
+import blog.blog.dto.CommentDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,5 +27,9 @@ public class Comment {
     public Comment(String content, Article article) {
         this.content = content;
         this.article = article;
+    }
+
+    public void update(CommentDTO commentDTO) {
+        this.content = commentDTO.getContent();
     }
 }

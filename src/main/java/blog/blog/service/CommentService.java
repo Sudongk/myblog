@@ -6,7 +6,6 @@ import blog.blog.model.Comment;
 import blog.blog.repository.ArticleRepository;
 import blog.blog.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,5 +45,15 @@ public class CommentService {
     public Comment getComment(Long id) {
         Optional<Comment> comment = commentRepository.findById(id);
         return comment.orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Transactional
+    public Optional<Comment> updateComment(Long id, CommentDTO commentDTO) {
+        Optional<Comment> comment = commentRepository.findById(id);
+        comment.ifPresentOrElse(
+                c -> c.update(commentDTO),
+                () -> {throw new IllegalStateException("존재하지 않는 댓글");}
+        );
+        return comment;
     }
 }
